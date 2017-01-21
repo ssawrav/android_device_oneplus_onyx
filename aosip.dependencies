@@ -1,0 +1,28 @@
+[
+ {
+   "repository" : "dirtyredmi2/android_device_oppo_common",
+   "target_path": "device/oppo/common",
+   "branch"     :  "n"
+ },
+ {
+   "repository" : "ssawrav/Arsenic.Kernel",
+   "target_path": "kernel/oneplus/onyx",
+   "branch"     : "stable"
+ },
+ {
+   "repository" : "TheMuppets/proprietary_vendor_qcom_binaries",
+   "target_path": "vendor/qcom/binaries",
+   "branch"     : "cm-14.1"
+ },
+ {
+   "remote"     : "laos"
+   "repository" : "LineageOS/android_packages_resources_devicesettings",
+   "target_path": "packages/resources/devicesettings",
+   "branch"     : "cm-14.1"
+ },
+ {
+   "repository" : "TheMuppets/proprietary_vendor_oneplus",
+   "target_path": "vendor/oneplus",
+   "branch"     : "cm-14.1"
+ }
+]
