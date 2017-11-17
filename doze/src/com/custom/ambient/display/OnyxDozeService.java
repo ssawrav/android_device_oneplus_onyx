@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.cyanogenmod.doze.onyx;
+package com.custom.ambient.display;
 
 import android.app.Service;
 import android.content.BroadcastReceiver;
