@@ -28,7 +28,7 @@
         </service>
 
         <activity
-            android:name=".WakeUpGestureSettings"
+            android:name=".DozeSettings"
             android:label="@string/ambient_display_title"
             android:theme="@android:style/Theme.DeviceDefault.Settings">
          </activity>
