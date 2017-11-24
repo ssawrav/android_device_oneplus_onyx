@@ -417,7 +417,7 @@ service rfs_access /system/bin/rfs_access
 service qmuxd /system/bin/qmuxd
     class main
     user radio
-    group radio audio bluetooth gps
+    group radio audio bluetooth gps oem_2950
 
 service netmgrd /system/bin/netmgrd
     class main
@@ -466,7 +466,7 @@ service wpa_supplicant /vendor/bin/hw/wpa_supplicant \
 service loc_launcher /system/bin/loc_launcher
     #loc_launcher will start as root and set its uid to gps
     class late_start
-    group gps qcom_oncrpc inet net_raw diag net_admin wifi
+    group gps qcom_oncrpc inet net_raw diag oem_2950 net_admin wifi
 
 service qseecomd /system/bin/qseecomd
     class core
@@ -525,7 +525,7 @@ service config_bdaddr /system/bin/btnvtool -O
 service hciattach /system/bin/sh /init.qcom.bt.sh
     class late_start
     user root
-    group bluetooth radio
+    group bluetooth net_bt_admin oem_2950 radio
     disabled
     oneshot
 
@@ -548,7 +548,7 @@ service audiod /system/bin/audiod
 service wcnss-service /system/bin/wcnss_service
     class late_start
     user system
-    group system wifi radio
+    group system wifi oem_2950 radio
     oneshot
 
 service ppd /system/bin/mm-pp-daemon
@@ -601,5 +601,5 @@ service pfm /system/bin/pfm
 service ril-daemon2 /vendor/bin/hw/rild -c 2
     class main
     user radio
-    group radio cache inet misc audio log readproc wakelock oem_2901
+    group radio cache inet misc audio log readproc wakelock oem_2950
     capabilities BLOCK_SUSPEND NET_ADMIN NET_RAW
