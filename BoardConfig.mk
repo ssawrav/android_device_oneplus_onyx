@@ -159,15 +159,16 @@ TARGET_USE_COMPAT_GRALLOC_PERFORM := true
 # Include path
 TARGET_SPECIFIC_HEADER_PATH := $(PLATFORM_PATH)/include
 
+# Vendor Interface Manifest
+DEVICE_MANIFEST_FILE := $(PLATFORM_PATH)/manifest.xml
+DEVICE_MATRIX_FILE := $(PLATFORM_PATH)/compatibility_matrix.xml
+
 # Init
 TARGET_INIT_VENDOR_LIB := libinit_onyx
 TARGET_RECOVERY_DEVICE_MODULES := libinit_onyx
 
 # Keymaster
 TARGET_KEYMASTER_WAIT_FOR_QSEE := true
-
-# Vendor Interface Manifest
-DEVICE_MANIFEST_FILE := $(PLATFORM_PATH)/manifest.xml
 
 # Lights
 TARGET_PROVIDES_LIBLIGHT := true
