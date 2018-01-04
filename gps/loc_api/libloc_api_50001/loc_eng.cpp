@@ -77,11 +77,11 @@
 #define FAILURE FALSE
 
 #ifndef GPS_CONF_FILE
-#define GPS_CONF_FILE            "/vendor/etc/gps.conf"   //??? platform independent
+#define GPS_CONF_FILE            "/etc/gps.conf"   //??? platform independent
 #endif
 
 #ifndef SAP_CONF_FILE
-#define SAP_CONF_FILE            "/vendor/etc/sap.conf"
+#define SAP_CONF_FILE            "/etc/sap.conf"
 #endif
 
 #define XTRA1_GPSONEXTRA         "xtra1.gpsonextra.net"
@@ -2886,38 +2886,6 @@ static int set_sched_policy(int tid, SchedPolicy policy)
 #endif /* USE_GLIB */
 
 /*===========================================================================
-FUNCTION resolve_config_file_path
-
-DESCRIPTION
-   resolve the given config file path into a vaild full path considering that
-   it could be located in vendor partition.
-
-DEPENDENCIES
-   None
-
-RETURN VALUE
-   None
-
-SIDE EFFECTS
-   N/A
-
-===========================================================================*/
-static void resolve_config_file_path(const char* conf_file_name,
-                                     char* resolved_file_path) {
-    FILE *file;
-    if (conf_file_name[0] == '/') {
-        sprintf(resolved_file_path, "/vendor%s", conf_file_name);
-    } else {
-        sprintf(resolved_file_path, "/vendor/%s", conf_file_name);
-    }
-    if ((file = fopen(resolved_file_path, "r")) != NULL) {
-        fclose(file);
-        return;
-    }
-    strcpy(resolved_file_path, conf_file_name);
-}
-
-/*===========================================================================
 FUNCTION    loc_eng_read_config
 
 DESCRIPTION
@@ -2942,11 +2910,8 @@ int loc_eng_read_config(void)
       loc_default_parameters();
       // We only want to parse the conf file once. This is a good place to ensure that.
       // In fact one day the conf file should go into context.
-      char conf_file_name[256];
-      resolve_config_file_path(GPS_CONF_FILE, conf_file_name);
-      UTIL_READ_CONF(conf_file_name, gps_conf_table);
-      resolve_config_file_path(SAP_CONF_FILE, conf_file_name);
-      UTIL_READ_CONF(conf_file_name, sap_conf_table);
+      UTIL_READ_CONF(GPS_CONF_FILE, gps_conf_table);
+      UTIL_READ_CONF(SAP_CONF_FILE, sap_conf_table);
       configAlreadyRead = true;
     } else {
       LOC_LOGV("GPS Config file has already been read\n");
