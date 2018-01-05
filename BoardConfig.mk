@@ -48,12 +48,17 @@ BOARD_KERNEL_CMDLINE += androidboot.selinux=permissive
 BOARD_KERNEL_PAGESIZE := 2048
 BOARD_MKBOOTIMG_ARGS := --ramdisk_offset 0x01000000 --tags_offset 0x00000100
 BOARD_KERNEL_IMAGE_NAME := zImage-dtb
+#BOARD_KERNEL_SEPARATED_DT := true
 #TARGET_KERNEL_APPEND_DTB := true
 TARGET_KERNEL_ARCH := arm
 TARGET_KERNEL_CONFIG := onyx_defconfig
 TARGET_KERNEL_SOURCE := kernel/oneplus/onyx
 KERNEL_TOOLCHAIN := $(ANDROID_BUILD_TOP)/prebuilts/gcc/$(HOST_OS)-x86/arm/arm-eabi-4.8/bin
 KERNEL_TOOLCHAIN_PREFIX := arm-eabi-
+#TARGET_KERNEL_CROSS_COMPILE_PREFIX := arm-linux-androideabi-
+
+# Binder
+TARGET_USES_64_BIT_BINDER := true
 
 # ANT+
 BOARD_ANT_WIRELESS_DEVICE := "vfs-prerelease"
@@ -190,6 +195,8 @@ TARGET_NO_RPC := true
 
 # SnapDragon LLVM Compiler
 TARGET_USE_SDCLANG := true
+
+ALLOW_MISSING_DEPENDENCIES=true
 
 # Wifi
 BOARD_HAS_QCOM_WLAN := true

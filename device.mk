@@ -300,3 +300,7 @@ PRODUCT_PACKAGES += \
 
 # Inherit from oppo-common
 $(call inherit-product, device/oppo/common/common.mk)
+
+#Temp fix
+PRODUCT_PACKAGES += \
+    android.hidl.base@1.0
