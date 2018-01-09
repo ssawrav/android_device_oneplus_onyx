@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.custom.ambient.display"
+    package="com.cyanogenmod.doze.onyx"
     android:versionCode="1"
     android:versionName="1.0"
     android:sharedUserId="android.uid.system">
@@ -16,22 +16,30 @@
         android:label="OnyxDoze"
         android:persistent="true">
 
-        <receiver android:name="com.custom.ambient.display.BootCompletedReceiver">
+        <receiver android:name="com.cyanogenmod.doze.onyx.BootCompletedReceiver">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </receiver>
 
-        <service android:name="com.custom.ambient.display.OnyxDozeService"
+        <service android:name="com.cyanogenmod.doze.onyx.OnyxDozeService"
                  android:permission="OnyxDozeService">
         </service>
 
         <activity
             android:name=".WakeUpGestureSettings"
-            android:label="@string/ambient_display_title"
+            android:label="@string/screen_gestures_panel_title"
             android:theme="@android:style/Theme.DeviceDefault.Settings">
-         </activity>
+            <intent-filter>
+                <action android:name="com.android.settings.action.EXTRA_SETTINGS" />
+            </intent-filter>
+            <meta-data
+                android:name="com.android.settings.category"
+                android:value="com.android.settings.category.ia.display" />
+            <meta-data android:name="com.android.settings.summary"
+                android:resource="@string/screen_gestures_panel_dashboard_summary" />
+        </activity>
 
     </application>
 </manifest>
