@@ -17,9 +17,9 @@
     <string name="screen_gestures_panel_title">Doze Pulse</string>
     <string name="screen_gestures_panel_dashboard_summary">Manage ambient display notifications</string>
 
-    <string name="ambient_display_title">Ambient display</string>
+    <string name="ambient_display_title">Custom Ambient display</string>
 
-    <string name="ambient_display_enable_title">Ambient display</string>
+    <string name="ambient_display_enable_title">Custom Ambient display</string>
     <string name="ambient_display_enable_summary">Wake screen when you receive notifications</string>
 
     <string name="hand_wave_gesture_title">Hand wave</string>
