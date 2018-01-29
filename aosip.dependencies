@@ -1,0 +1,17 @@
+[
+ {
+   "repository" : "ssawrav/device_oppo_common",
+   "target_path": "device/oppo/common",
+   "branch"     : "8.0"
+ },
+ {
+   "repository" : "ssawrav/kernel_oneplus_onyx",
+   "target_path": "kernel/oneplus/onyx",
+   "branch"     : "o-mr1"
+ },
+ {
+   "repository" : "ssawrav/proprietary_vendor_oneplus",
+   "target_path": "vendor/oneplus",
+   "branch"     : "8.1"
+ }
+]
