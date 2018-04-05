@@ -700,6 +700,7 @@ int32_t QCameraPicChannel::flushSuperbuffer(uint32_t frame_idx)
     return rc;
 }
 
+
 /*===========================================================================
  * FUNCTION   : QCameraVideoChannel
  *

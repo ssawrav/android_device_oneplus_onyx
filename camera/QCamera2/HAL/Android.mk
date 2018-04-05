@@ -19,17 +19,12 @@ LOCAL_SRC_FILES := \
 
 LOCAL_CFLAGS = -Wall
 
-#use media extension
 ifeq ($(TARGET_USES_MEDIA_EXTENSIONS), true)
 LOCAL_CFLAGS += -DUSE_MEDIA_EXTENSIONS
 endif
 
-# Debug logs are disabled
-LOCAL_CFLAGS += -DDISABLE_DEBUG_LOG
-
-TARGET_USE_VENDOR_CAMERA_EXT := true
-LOCAL_CFLAGS += -DDEFAULT_ZSL_MODE_ON
-LOCAL_CFLAGS += -DDEFAULT_DENOISE_MODE_ON
+#Debug logs are enabled
+#LOCAL_CFLAGS += -DDISABLE_DEBUG_LOG
 
 ifeq ($(TARGET_USE_VENDOR_CAMERA_EXT),true)
 LOCAL_CFLAGS += -DUSE_VENDOR_CAMERA_EXT
@@ -42,8 +37,8 @@ LOCAL_C_INCLUDES := \
         $(LOCAL_PATH)/../stack/common \
         framework/native/include \
         frameworks/native/include/media/openmax \
-        $(call project-path-for,qcom-display)/libgralloc \
-        $(call project-path-for,qcom-media)/libstagefrighthw \
+        hardware/qcom/display-caf/msm8974/libgralloc \
+        hardware/qcom/media-caf/msm8974/libstagefrighthw \
         system/media/camera/include \
         $(LOCAL_PATH)/../../mm-image-codec/qexif \
         $(LOCAL_PATH)/../../mm-image-codec/qomx_core \
@@ -56,11 +51,7 @@ else
 LOCAL_CFLAGS += -DUSE_KK_CODE
 endif
 
-ifeq ($(TARGET_USE_VENDOR_CAMERA_EXT),true)
-LOCAL_C_INCLUDES += $(call project-path-for,qcom-display)/msm8974/libgralloc
-else
-LOCAL_C_INCLUDES += $(call project-path-for,qcom-display)/libgralloc
-endif
+LOCAL_C_INCLUDES += hardware/qcom/display-caf/msm8974/libgralloc
 LOCAL_C_INCLUDES += $(TARGET_OUT_INTERMEDIATES)/KERNEL_OBJ/usr/include
 LOCAL_C_INCLUDES += $(TARGET_OUT_INTERMEDIATES)/KERNEL_OBJ/usr/include/media
 LOCAL_ADDITIONAL_DEPENDENCIES := $(TARGET_OUT_INTERMEDIATES)/KERNEL_OBJ/usr
@@ -72,10 +63,10 @@ LOCAL_STATIC_LIBRARIES := libarect
 LOCAL_MODULE_RELATIVE_PATH    := hw
 LOCAL_PROPRIETARY_MODULE := true
 LOCAL_MODULE := camera.$(TARGET_BOARD_PLATFORM)
-LOCAL_CLANG := false
-LOCAL_32_BIT_ONLY := true
 LOCAL_MODULE_TAGS := optional
 
 include $(BUILD_SHARED_LIBRARY)
 
+ifeq ($(TARGET_USES_AOSP),false)
 include $(LOCAL_PATH)/test/Android.mk
+endif

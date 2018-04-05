@@ -1,4 +1,4 @@
-/* Copyright (c) 2012-2016, The Linux Foundation. All rights reserved.
+/* Copyright (c) 2012-2014, The Linux Foundation. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are
@@ -44,8 +44,6 @@
 #define AF_DEBUG_DATA_SIZE           (643)
 #define ASD_DEBUG_DATA_SIZE          (100)
 #define STATS_BUFFER_DEBUG_DATA_SIZE (74756)
-
-#define ARRAY_SIZE(a) (sizeof(a)/sizeof((a)[0]))
 
 #define CEILING64(X) (((X) + 0x0003F) & 0xFFFFFFC0)
 #define CEILING32(X) (((X) + 0x0001F) & 0xFFFFFFE0)
@@ -132,6 +130,8 @@ typedef enum {
     CAM_STATUS_ACCEPTED,      /* Parameter accepted */
     CAM_STATUS_MAX,
 } cam_status_t;
+
+#define QCAMERA_MAX_FILEPATH_LENGTH 64
 
 typedef enum {
     CAM_POSITION_BACK,
@@ -443,6 +443,16 @@ typedef enum {
     CAM_ISO_MODE_800,
     CAM_ISO_MODE_1600,
     CAM_ISO_MODE_3200,
+    CAM_ISO_MODE_125,
+    CAM_ISO_MODE_160,
+    CAM_ISO_MODE_250,
+    CAM_ISO_MODE_320,
+    CAM_ISO_MODE_500,
+    CAM_ISO_MODE_640,
+    CAM_ISO_MODE_1000,
+    CAM_ISO_MODE_1250,
+    CAM_ISO_MODE_2000,
+    CAM_ISO_MODE_2500,
     CAM_ISO_MODE_MAX
 } cam_iso_mode_type;
 
@@ -495,6 +505,14 @@ typedef struct {
     int32_t af_manual_lens_position;
 } cam_manual_focus_parm_t;
 
+#if 0
+typedef struct fps_t
+{
+    int fc;
+    int fc_old;
+    int64_t time_old;
+}fps_t;
+#endif
 typedef enum {
     CAM_SCENE_MODE_OFF,
     CAM_SCENE_MODE_AUTO,
@@ -518,6 +536,8 @@ typedef enum {
     CAM_SCENE_MODE_FACE_PRIORITY,
     CAM_SCENE_MODE_BARCODE,
     CAM_SCENE_MODE_HDR,
+    CAM_SCENE_MODE_HIGH_FPS_RECORDING,
+    CAM_SCENE_MODE_MANUAL,
     CAM_SCENE_MODE_MAX
 } cam_scene_mode_type;
 
@@ -587,7 +607,6 @@ typedef struct  {
 typedef enum {
     CAM_STREAMING_MODE_CONTINUOUS, /* continous streaming */
     CAM_STREAMING_MODE_BURST,      /* burst streaming */
-    CAM_STREAMING_MODE_BATCH,      /* stream frames in batches */
     CAM_STREAMING_MODE_MAX
 } cam_streaming_mode_t;
 
@@ -870,6 +889,7 @@ typedef struct {
 typedef struct {
     int32_t cct_value;
     int32_t decision;
+    int32_t wb_mode;
 } cam_awb_params_t;
 
 typedef struct {
@@ -1043,6 +1063,10 @@ typedef  struct {
 
     uint8_t is_mobicat_stats_params_valid;
     cam_stats_buffer_exif_debug_t mobicat_stats_buffer_data;
+
+    /* choose stable frame for image stability */
+    uint8_t is_af_stats_info_valid;
+    int focus_value;
 } cam_metadata_info_t;
 
 typedef enum {
@@ -1266,7 +1290,8 @@ typedef enum {
     CAM_INTF_PARM_FOCUS_BRACKETING,
     CAM_INTF_PARM_FLASH_BRACKETING,
     CAM_INTF_PARM_GET_IMG_PROP,
-
+    CAM_INTF_PARM_APP_MASK,
+    CAM_INTF_PARM_G_SENSOR_DATA,
     CAM_INTF_PARM_MAX
 } cam_intf_parm_type_t;
 
@@ -1365,6 +1390,12 @@ typedef struct {
 #define CAM_MAX_MAP_WIDTH         6
 
 #define CAM_MAX_TONEMAP_CURVE_SIZE    128
+
+typedef struct {
+  float x;
+  float y;
+  float z;
+} cam_set_gsensor_t;
 
 typedef struct {
     int tonemap_points_cnt;

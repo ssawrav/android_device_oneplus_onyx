@@ -15,6 +15,11 @@ ifeq ($(strip $(TARGET_USES_ION)),true)
 LOCAL_CFLAGS += -DUSE_ION
 endif
 
+ifneq ($(call is-platform-sdk-version-at-least,20),true)
+LOCAL_CFLAGS += -DUSE_KK_CODE
+endif
+
+
 LOCAL_CFLAGS += -D_ANDROID_
 
 LOCAL_SRC_FILES:= \
@@ -86,7 +91,7 @@ else
         LOCAL_CFLAGS += -DCAMERA_ION_FALLBACK_HEAP_ID=ION_CAMERA_HEAP_ID
         LOCAL_CFLAGS += -DNUM_RECORDING_BUFFERS=5
 endif
-LOCAL_CFLAGS += -Wall -Werror
+LOCAL_CFLAGS += -Wall -Wextra -Werror
 
 LOCAL_SHARED_LIBRARIES:= \
          libcutils libdl libmmcamera_interface
@@ -94,9 +99,7 @@ LOCAL_SHARED_LIBRARIES:= \
 LOCAL_MODULE_TAGS := optional
 
 LOCAL_MODULE:= mm-qcamera-app
-LOCAL_CLANG := false
-LOCAL_32_BIT_ONLY := true
-#include $(BUILD_EXECUTABLE)
+include $(BUILD_EXECUTABLE)
 endif
 
 ifeq ($(call is-vendor-board-platform,QCOM),true)
@@ -184,7 +187,7 @@ else
         LOCAL_CFLAGS += -DCAMERA_ION_FALLBACK_HEAP_ID=ION_CAMERA_HEAP_ID
         LOCAL_CFLAGS += -DNUM_RECORDING_BUFFERS=5
 endif
-LOCAL_CFLAGS += -Wall -Werror
+LOCAL_CFLAGS += -Wall -Wextra -Werror
 
 LOCAL_SHARED_LIBRARIES:= \
          libcutils libdl libmmcamera_interface
@@ -192,7 +195,5 @@ LOCAL_SHARED_LIBRARIES:= \
 LOCAL_MODULE_TAGS := optional
 
 LOCAL_MODULE:= libmm-qcamera
-LOCAL_CLANG := false
-LOCAL_32_BIT_ONLY := true
-#include $(BUILD_SHARED_LIBRARY)
+include $(BUILD_SHARED_LIBRARY)
 endif
